@@ -16,6 +16,22 @@ MRI images are reconstructed from fewer samples using transforms like FFT, DWT, 
 The reconstructed images are compared using quality measures such as PSNR, RMSE, and SSIM.
 The goal is to find a balance between fast reconstruction and accurate image quality.
 
+### Objectives
+- Reduce MRI scan time using compressed sensing
+- Apply sparsity-based reconstruction techniques
+- Compare performance of DWT, FFT, DCT, and Basis Pursuit
+- Evaluate reconstruction quality using metrics
+
+### Methodology
+
+1. Input MRI image
+2. Apply undersampling in frequency domain
+3. Transform using:
+   - DWT / FFT / DCT
+4. Apply sparse reconstruction (Basis Pursuit)
+5. Reconstruct image
+6. Compare results
+
 ### Update 1
 1. Changing code from Python to Matlab.
 2. Run algorithms for more images(only 1 image used with 3 sampling rate) and compare the average
@@ -50,6 +66,11 @@ performance to conclude.
 | FFT Sorted | 41.2067 | 0.0099 | 0.9700 |
 | DCT Sorted | 44.2179 | 0.0074 | 0.9796 |
 | L1 Sorted | 27.3274 | 0.0516 | 0.6031 |
+
+### Future Work
+- Implement deep learning-based reconstruction
+- Improve reconstruction speed
+- Use real-time MRI datasets
 
 ### Additional Information
 Platform used:- Laptop / Matlab 2024b  
