@@ -93,21 +93,90 @@ $$
 
 - DCT (Cosine Transform) → energy compaction in low frequencies
 
+These transforms convert the image into sparse coefficients.
 
-### Update 1
-1. Changing code from Python to Matlab.
-2. Run algorithms for more images(only 1 image used with 3 sampling rate) and compare the average
-performance to conclude.
-3. Toy example to compare the algorithms.
+3. Undersampling  
+Random sampling of coefficients:
+ N = samplingrate * M
+- Only selected coefficients are retained and remaining coefficients are set to zero
 
-### Update 2
-1. How are PSNR, RMSE, SSIM values are computed.
-2. Implement both random sampling and sorted sampling for every algorithm.
+4. Reconstruction Algorithms
+(a) DWT Reconstruction
+- Apply wavelet decomposition
+- Randomly sample coefficients
+- Reconstruct using inverse wavelet transform
 
-## Process flow
+(b) FFT Reconstruction
+- Apply FFT
+- Randomly sample frequency coefficients
+- Reconstruct using inverse FFT:
+       X = real(IIFT(y))
+
+(c) DCT Reconstruction
+- Apply DCT
+- Select largest coefficients
+- Reconstruct using inverse DCT
+
+(d) Basis Pursuit (Compressed Sensing)
+- Generate random sensing matrix:
+
+$$
+y = \Phi x
+$$
+
+- Construct sensing matrix:
+
+$$
+\Theta = \Phi \Psi^{-1}
+$$
+
+- Solve optimization:
+
+$$
+\min \|s\|_1 \quad \text{s.t.} \quad \Theta s = y
+$$
+
+- Reconstruct image:
+
+$$
+x' = \Psi s
+$$
+
+### Performance Metrics
+Reconstruction quality is evaluated using:
+- RMSE(Error):
+
+$$
+\text{RMSE} = \sqrt{\frac{1}{N} \sum (x - x')^2}
+$$
+
+- PSNR(Quality):
+
+$$
+\text{PSNR} = 10 \log_{10} \left( \frac{MAX^2}{MSE} \right)
+$$
+
+- SSIM(Similarity):
+
+$$
+\text{SSIM} = \frac{(2\mu_x \mu_{x'} + C_1)(2\sigma_{xx'} + C_2)}
+{(\mu_x^2 + \mu_{x'}^2 + C_1)(\sigma_x^2 + \sigma_{x'}^2 + C_2)}
+$$
+
+
+### Process flow
 <img width="504" height="231" alt="image" src="https://github.com/user-attachments/assets/a821621e-5e4e-4025-9322-4f83acfdf20e" />
 
-## Results
+### Dataset  
+The dataset used in this project consists of MRI brain images collected for medical image processing and reconstruction analysis. It contains approximately 14,715 images representing different brain scans with varying structures and intensity patterns. These images provide sufficient diversity for evaluating reconstruction algorithms under different conditions.
+This dataset is suitable for analyzing the performance of compressed sensing techniques, as it allows comparison of reconstruction quality using standard metrics like RMSE, PSNR, and SSIM.
+
+### Conclusion
+In this project, we have proposed an efficient methodology for image reconstruction from MRI scans using compressed sensing and sparse transform. The central idea of minimizing the scanning time while ensuring a decent image quality has been successfully achieved through simulation and implementation of DWT, FFT, DCT, and Basis Pursuit methods of reconstruction.
+According to our findings, DCT is an efficient method of reconstruction when it comes to simulation, whereas FFT gives better results in line with practical MRI imaging. On the other hand, Basis Pursuit algorithm based on L1-norm proves to be more efficient and reliable for handling undersampling problems.
+Thus, we can conclude that there is always a trade-off between image quality and computational complexity, and the proposed technique helps minimize these limitations and improve efficiency in terms of reduced amount of data.
+
+### Results
 <img width="1800" height="1300" alt="image" src="https://github.com/user-attachments/assets/b4495b8b-fff6-4003-b718-c022d6f7b05c" />
 
 <img width="1800" height="1300" alt="image" src="https://github.com/user-attachments/assets/d2206eb1-f7ca-4aee-9be8-16fa3abb3517" />
@@ -134,8 +203,25 @@ performance to conclude.
 - Improve reconstruction speed
 - Use real-time MRI datasets
 
+### References
+1. S. Villota and E. Inga, “Sparse Transform and Compressed Sensing Methods to Improve Efficiency and Quality in Magnetic Resonance Medical Imaging,” Sensors, vol. 25, no. 5137, 2025.
+2. Dataset - https://www.kaggle.com/datasets/ashfakyeafi/brain-mri-images
+3. D. L. Donoho, “Compressed Sensing,” IEEE Transactions on Information Theory, vol. 52, no. 4, pp. 1289–1306, 2006.
+4. M. Lustig, D. Donoho, and J. M. Pauly, “Sparse MRI: The Application of Compressed Sensing for Rapid MR Imaging,” Magnetic Resonance in Medicine, 2007.
+
+### Update 1
+1. Changing code from Python to Matlab.
+2. Run algorithms for more images(only 1 image used with 3 sampling rate) and compare the average
+performance to conclude.
+3. Toy example to compare the algorithms.
+
+### Update 2
+1. How are PSNR, RMSE, SSIM values are computed.
+2. Implement both random sampling and sorted sampling for every algorithm.
+
 ### Additional Information
 Platform used:- Laptop / Matlab 2024b  
 Hardware: CPU  
 Time taken: 2793.38 seconds  
 MATLAB 2024b  
+
