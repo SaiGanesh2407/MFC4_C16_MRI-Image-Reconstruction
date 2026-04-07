@@ -171,10 +171,7 @@ $$
 The dataset used in this project consists of MRI brain images collected for medical image processing and reconstruction analysis. It contains approximately 14,715 images representing different brain scans with varying structures and intensity patterns. These images provide sufficient diversity for evaluating reconstruction algorithms under different conditions.
 This dataset is suitable for analyzing the performance of compressed sensing techniques, as it allows comparison of reconstruction quality using standard metrics like RMSE, PSNR, and SSIM.
 
-### Conclusion
-In this project, we have proposed an efficient methodology for image reconstruction from MRI scans using compressed sensing and sparse transform. The central idea of minimizing the scanning time while ensuring a decent image quality has been successfully achieved through simulation and implementation of DWT, FFT, DCT, and Basis Pursuit methods of reconstruction.
-According to our findings, DCT is an efficient method of reconstruction when it comes to simulation, whereas FFT gives better results in line with practical MRI imaging. On the other hand, Basis Pursuit algorithm based on L1-norm proves to be more efficient and reliable for handling undersampling problems.
-Thus, we can conclude that there is always a trade-off between image quality and computational complexity, and the proposed technique helps minimize these limitations and improve efficiency in terms of reduced amount of data.
+
 
 ### Results
 <img width="1800" height="1300" alt="image" src="https://github.com/user-attachments/assets/b4495b8b-fff6-4003-b718-c022d6f7b05c" />
@@ -197,6 +194,11 @@ Thus, we can conclude that there is always a trade-off between image quality and
 | FFT Sorted | 41.2067 | 0.0099 | 0.9700 |
 | DCT Sorted | 44.2179 | 0.0074 | 0.9796 |
 | L1 Sorted | 27.3274 | 0.0516 | 0.6031 |
+
+### Conclusion
+In this project, we have proposed an efficient methodology for image reconstruction from MRI scans using compressed sensing and sparse transform. The central idea of minimizing the scanning time while ensuring a decent image quality has been successfully achieved through simulation and implementation of DWT, FFT, DCT, and Basis Pursuit methods of reconstruction.
+According to our findings, DCT is an efficient method of reconstruction when it comes to simulation, whereas FFT gives better results in line with practical MRI imaging. On the other hand, Basis Pursuit algorithm based on L1-norm proves to be more efficient and reliable for handling undersampling problems.
+Thus, we can conclude that there is always a trade-off between image quality and computational complexity, and the proposed technique helps minimize these limitations and improve efficiency in terms of reduced amount of data.
 
 ### Future Work
 - Implement deep learning-based reconstruction
